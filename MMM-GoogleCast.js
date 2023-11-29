@@ -69,6 +69,8 @@ Module.register("MMM-GoogleCast",{
 			else
 			{
 				this.media = true;
+				this.updateDom()
+				this.show(this.config.animationSpeed);
 			}
 			if (this.config.device == payload.id)
 			{

@@ -1,7 +1,7 @@
 .MMM-GoogleCast .main {
     display: grid;
     text-align: center;
-    grid-template-columns: 95% 5%;
+    /*grid-template-columns: 95% 5%;*/
     max-width: 300px;
     height: auto;
     /* width: 100%;
@@ -22,11 +22,16 @@
 .MMM-GoogleCast .header {
     display: flex; 
     align-items: center; 
-    justify-content: center;
+    justify-content: left;
     flex-direction: row;
-    margin-bottom: -6px;
+    /*margin-bottom: -6px;*/
     margin-top: -10px;
 }
+
+.MMM-GoogleCast .header-hidden {
+    display: none;
+}
+
 .MMM-GoogleCast #app, #deviceName {
     font-size: 13px; 
     margin-left: 10px;
@@ -38,7 +43,7 @@
     font-weight: lighter;
 }
 .MMM-GoogleCast .cover {
-    text-align: center;
+    text-align: left;
     margin: 0 auto;
 }
 .MMM-GoogleCast #albumCover{

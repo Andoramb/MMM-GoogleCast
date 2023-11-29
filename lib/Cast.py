@@ -36,25 +36,29 @@ class StatusMediaListener:
     def __init__(self, name, cast):
         self.name = name
         self.cast = cast
+        self.current_media_info = None 
 
     def new_media_status(self, status):
-        global oldlink, oldStreamId, oldState
+        global oldState
         try:
             link = status.images[0].url
         except IndexError:
             link = None
-        if oldState != status.player_state or (oldlink != link and oldStreamId != status.content_id) or (oldState is None and oldState is None and oldStreamId is None):
+
+        current_media_info = {
+            "id": deviceId,
+            "title": status.title,
+            "artist": status.artist,
+            "album": status.album_name,
+            "albumArtist": status.album_artist,
+            "state": status.player_state,
+            "image": link,
+        }
+
+        if current_media_info != self.current_media_info or oldState != status.player_state:
+            self.current_media_info = current_media_info
             oldState = status.player_state
-            oldlink = link
-            oldStreamId = status.content_id
-            # if __debug__:
-            #     print("Title:" + str(status.title))
-            #     print("Artist:" + str(status.artist))
-            #     print("AlbumName:" + str(status.album_name))
-            #     print("AlbumArtist:" + str(status.album_artist))
-            #     print("State:" + str(status.player_state))
-            #     print("ImageURL:" + str(link))
-            toNode("mediaStatus", {"id": deviceId, "title": status.title, "artist": status.artist, "album": status.album_name, "albumArtist": status.album_artist, "state": status.player_state, "image": link})
+            toNode("mediaStatus", self.current_media_info)
 
 class StatusListener:
     def __init__(self, name, cast):
